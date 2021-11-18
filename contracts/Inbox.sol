@@ -10,10 +10,19 @@ contract Inbox {
         message = initalMessage;
     }
 
-    // This function called once the contrcat is disployed
+    // This function called atfer the contrcat is disployed
     // we are modifying the the data 
     function setMessage(string newMessage) public {
         message = newMessage; 
     }
 
 }
+
+/* We write our contrcat => inbox.sol
+   We compile our contract => complie.js
+   We test Our contract => test.js
+*/
+
+
+
+
