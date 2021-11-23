@@ -79,6 +79,46 @@ describe("Lottery", () => {
         assert.equal(3, players.length);
     });
 
+    // Assure that the player sent a minimum amount of money
+    it('the player send a minimum amount of Ether', async ()=> {
+       
+       try {
+           await  lottery.methods.enter().send({
+           from : accounts[0],
+           value: 0
+       });
+            // to assure that the code will fail
+            assert(false); 
+       } catch (err) {
+            assert(err);
+       }
+    });
+
+    // Check the whole contract
+    it("send money to the winner and reset the players array", async ()=> {
+        // The winner enter the lottery by 2 ether
+        await lottery.methods.enter().send({
+            from: accounts[0],
+            value: web3.utils.toWei("2", "ether")
+        });
+
+        // check the initial balance of the player using we3
+        const initialBalance = await web3.eth.getBalance(accounts[0]);
+
+        // Pick a winner
+        await lottery.methods.pickWinner().send({
+            from: accounts[0],
+        });
+
+        // check the Final balance of the player
+        const finalBalance = await web3.eth.getBalance(accounts[0]);
+
+        const difference  = finalBalance - initialBalance;
+        
+        // Check the difference 
+        assert(difference >  web3.utils.toWei("1.8", "ether"));
+    });
+
 });
     
 
