@@ -16,6 +16,7 @@ const provider = new HDwalletProvider(
     "https://rinkeby.infura.io/v3/b07c048d810e4e64881be506203a2916"
 );
 
+
 // Connect my provider with web3 and use it to deploy
 const web3 = new Web3(provider);
 
@@ -32,7 +33,7 @@ const deploy = async () => {
 
     console.log("Contract deployed to this address", result.options.address)
     console.log(interface);
-    // To prevent hanging developpement               
+    // To prevent hanging development               
     provider.engine.stop();
 }   
 
